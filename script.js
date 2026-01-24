@@ -229,3 +229,7 @@ console.log('Kettlebell Rep Counter initialized');
 updateTimerDisplay();
 updateRepDisplay();
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+
