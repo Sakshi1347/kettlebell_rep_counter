@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kettlebell Rep Counter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Homepage Screen -->
+    <div id="homepage" class="screen active">
+        <h1>Kettlebell Rep Counter</h1>
+        <button id="startBtn" class="start-button">Start</button>
+    </div>
+
+    <!-- Athlete Details Screen -->
+    <div id="athleteDetails" class="screen">
+        <h1>Kettlebell Rep Counter</h1>
+        <form id="athleteForm">
+            <div class="form-group">
+                <label for="athleteName">Athlete Name</label>
+                <input type="text" id="athleteName" name="athleteName" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <select id="state" name="state" required>
+                    <option value="">Select State</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Ladakh">Ladakh</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Puducherry">Puducherry</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bodyweight">Bodyweight</label>
+                <input type="number" id="bodyweight" name="bodyweight" min="0" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="kettlebellWeight">Kettlebell Weight</label>
+                <input type="number" id="kettlebellWeight" name="kettlebellWeight" min="0" step="any" required>
+            </div>
+            <button type="submit" class="start-timer-button">Start Timer</button>
+        </form>
+    </div>
+
+    <!-- Championship Screen -->
+    <div id="championship" class="screen">
+        <h1 class="championship-title">Indian Kettlebell Championship 2026</h1>
+        <div class="championship-container">
+            <div class="athlete-info-section">
+                <div class="info-item">
+                    <strong>Name:</strong>
+                    <span id="displayName"></span>
+                </div>
+                <div class="info-item">
+                    <strong>State:</strong>
+                    <span id="displayState"></span>
+                </div>
+                <div class="info-item">
+                    <strong>Bodyweight:</strong>
+                    <span id="displayBodyweight"></span>
+                </div>
+                <div class="info-item">
+                    <strong>Kettlebell Weight:</strong>
+                    <span id="displayKettlebellWeight"></span>
+                </div>
+            </div>
+            <div class="main-section">
+                <div class="timer-box">
+                    <div class="timer-label">Timer</div>
+                    <div id="timerDisplay" class="timer-display">00:00</div>
+                </div>
+                <div class="rep-counter-box" id="repCounterBox">
+                    <div class="rep-counter-header">
+                        <div class="rep-label">Rep Counter</div>
+                        <button class="minus-button" id="minusBtn">−</button>
+                    </div>
+                    <div id="repDisplay" class="rep-display">0</div>
+                </div>
+                <button id="finishBtn" class="finish-button">Finish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results" class="screen">
+        <h1>Results</h1>
+        <div class="results-container">
+            <div class="results-athlete-card">
+                <div class="results-card-title">Athlete Details</div>
+                <div class="results-item">
+                    <span class="results-item-label">Name:</span>
+                    <span class="results-item-value" id="resultsName"></span>
+                </div>
+                <div class="results-item">
+                    <span class="results-item-label">State:</span>
+                    <span class="results-item-value" id="resultsState"></span>
+                </div>
+                <div class="results-item">
+                    <span class="results-item-label">Bodyweight:</span>
+                    <span class="results-item-value" id="resultsBodyweight"></span>
+                </div>
+                <div class="results-item">
+                    <span class="results-item-label">Kettlebell Weight:</span>
+                    <span class="results-item-value" id="resultsKettlebellWeight"></span>
+                </div>
+            </div>
+            <div class="results-stats-card">
+                <div class="results-card-title">Performance</div>
+                <div class="results-item">
+                    <span class="results-item-label">Total Reps:</span>
+                    <span class="results-item-value highlight" id="resultsReps"></span>
+                </div>
+                <div class="results-item">
+                    <span class="results-item-label">Total Time:</span>
+                    <span class="results-item-value highlight" id="resultsTime"></span>
+                </div>
+            </div>
+        </div>
+        <p class="results-message">Great job</p>
+        <button id="homeBtn" class="home-button">Home</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

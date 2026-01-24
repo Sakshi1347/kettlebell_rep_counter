@@ -1,0 +1,515 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    color: #e8e8e8;
+    transition: opacity 0.3s ease;
+}
+
+.screen {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Homepage */
+#homepage {
+    background-image: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.9)
+        ),
+        url("assets/kettlebell.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+#homepage h1 {
+    font-size: 3em;
+    margin-bottom: 50px;
+    color: #e8e8e8;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 10px rgba(184, 134, 11, 0.3);
+    font-weight: 700;
+}
+
+.start-button {
+    padding: 18px 50px;
+    font-size: 1.3em;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.start-button:hover {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-color: #f4d03f;
+    color: #f4d03f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.start-button:active {
+    transform: translateY(0);
+}
+
+/* Athlete Details Screen */
+#athleteDetails {
+    background-image: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.9)
+        ),
+        url("assets/kettlebell.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: flex-start;
+    padding-top: 50px;
+}
+
+#athleteDetails h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #e8e8e8;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(184, 134, 11, 0.3);
+}
+
+#athleteForm {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    max-width: 450px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #d4af37;
+    letter-spacing: 0.5px;
+    font-size: 0.95em;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px;
+    font-size: 1em;
+    background: #1a1a1a;
+    color: #e8e8e8;
+    border: 1px solid #3a3a3a;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    background: #222;
+}
+
+.start-timer-button {
+    padding: 18px 50px;
+    font-size: 1.2em;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.start-timer-button:hover {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-color: #f4d03f;
+    color: #f4d03f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.start-timer-button:active {
+    transform: translateY(0);
+}
+
+/* Championship Screen */
+#championship {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+}
+
+.championship-title {
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #d4af37;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 15px rgba(212, 175, 55, 0.4);
+    font-weight: 700;
+}
+
+.championship-container {
+    display: flex;
+    flex: 1;
+    gap: 25px;
+    height: calc(100vh - 140px);
+    overflow: hidden;
+}
+
+.athlete-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    border-radius: 10px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.2);
+    height: fit-content;
+    flex: 0 0 auto;
+    min-width: fit-content;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-item strong {
+    color: #d4af37;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.info-item span {
+    color: #e8e8e8;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.main-section {
+    flex: 0 0 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.timer-box,
+.rep-counter-box {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.15);
+    padding: 30px;
+    min-height: 0;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.3s ease;
+}
+
+.finish-button {
+    flex: 0 0 auto;
+}
+
+.timer-label,
+.rep-label {
+    font-size: 1.3em;
+    color: #b8b8b8;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.timer-display {
+    font-size: 5.5em;
+    font-weight: 700;
+    color: #d4af37;
+    font-family: 'Courier New', 'Consolas', monospace;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 2px 10px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+}
+
+.rep-counter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.rep-counter-box {
+    cursor: pointer;
+    position: relative;
+}
+
+.rep-counter-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.3), 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.rep-counter-box:active {
+    transform: scale(0.98);
+}
+
+.rep-display {
+    font-size: 8em;
+    font-weight: 700;
+    color: #d4af37;
+    font-family: 'Courier New', 'Consolas', monospace;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 2px 10px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+    transition: all 0.2s ease;
+}
+
+.rep-counter-box:hover .rep-display {
+    color: #f4d03f;
+    text-shadow: 0 0 25px rgba(244, 208, 63, 0.6), 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.minus-button {
+    background: linear-gradient(135deg, #8b0000 0%, #6b0000 100%);
+    color: #e8e8e8;
+    border: 1px solid rgba(139, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.8em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+}
+
+.minus-button:hover {
+    background: linear-gradient(135deg, #a00000 0%, #800000 100%);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.6);
+}
+
+.minus-button:active {
+    transform: scale(0.95);
+}
+
+.finish-button {
+    padding: 14px 35px;
+    font-size: 1.1em;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.finish-button:hover {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-color: #f4d03f;
+    color: #f4d03f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.finish-button:active {
+    transform: translateY(0);
+}
+
+/* Results Screen */
+#results {
+    background-image: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.9)
+        ),
+        url("assets/kettlebell.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px;
+    gap: 30px;
+}
+
+#results h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #d4af37;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 15px rgba(212, 175, 55, 0.4);
+    font-weight: 700;
+}
+
+.results-container {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: center;
+}
+
+.results-athlete-card,
+.results-stats-card {
+    flex: 1;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    min-width: 300px;
+}
+
+.results-card-title {
+    font-size: 1.5em;
+    color: #d4af37;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 10px;
+}
+
+.results-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.results-item:last-child {
+    border-bottom: none;
+}
+
+.results-item-label {
+    color: #b8b8b8;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.results-item-value {
+    color: #e8e8e8;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.results-item-value.highlight {
+    color: #d4af37;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.results-message {
+    font-size: 1.8em;
+    color: #d4af37;
+    margin: 20px 0;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+.home-button {
+    padding: 18px 50px;
+    font-size: 1.2em;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.home-button:hover {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-color: #f4d03f;
+    color: #f4d03f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.home-button:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .results-container {
+        flex-direction: column;
+    }
+    
+    .timer-display,
+    .rep-display {
+        font-size: 6em;
+    }
+}
