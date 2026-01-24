@@ -73,7 +73,11 @@
                 <label for="kettlebellWeight">Kettlebell Weight</label>
                 <input type="number" id="kettlebellWeight" name="kettlebellWeight" min="0" step="any" required>
             </div>
-            <button type="submit" class="start-timer-button">Start Timer</button>
+            <div class="form-group">
+                <label for="event">Event</label>
+                <input type="text" id="event" name="event" placeholder="e.g., Snatch, Long Cycle, Jerk" required>
+            </div>
+            <button type="submit" class="start-timer-button">Continue</button>
         </form>
     </div>
 
@@ -98,11 +102,19 @@
                     <strong>Kettlebell Weight:</strong>
                     <span id="displayKettlebellWeight"></span>
                 </div>
+                <div class="info-item">
+                    <strong>Event:</strong>
+                    <span id="displayEvent"></span>
+                </div>
             </div>
             <div class="main-section">
                 <div class="timer-box">
                     <div class="timer-label">Timer</div>
                     <div id="timerDisplay" class="timer-display">00:00</div>
+                    <div class="timer-controls">
+                        <button id="startTimerBtn" class="timer-control-button start-timer-btn">Start Timer</button>
+                        <button id="pauseTimerBtn" class="timer-control-button pause-timer-btn" style="display: none;">Pause Timer</button>
+                    </div>
                 </div>
                 <div class="rep-counter-box" id="repCounterBox">
                     <div class="rep-counter-header">
@@ -137,6 +149,10 @@
                 <div class="results-item">
                     <span class="results-item-label">Kettlebell Weight:</span>
                     <span class="results-item-value" id="resultsKettlebellWeight"></span>
+                </div>
+                <div class="results-item">
+                    <span class="results-item-label">Event:</span>
+                    <span class="results-item-value" id="resultsEvent"></span>
                 </div>
             </div>
             <div class="results-stats-card">

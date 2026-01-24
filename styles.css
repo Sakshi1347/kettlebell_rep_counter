@@ -289,6 +289,52 @@ body {
     font-family: 'Courier New', 'Consolas', monospace;
     text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 2px 10px rgba(0, 0, 0, 0.8);
     letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.timer-control-button {
+    padding: 12px 30px;
+    font-size: 1em;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.timer-control-button:hover {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    border-color: #f4d03f;
+    color: #f4d03f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.timer-control-button:active {
+    transform: translateY(0);
+}
+
+.pause-timer-btn {
+    background: linear-gradient(135deg, #8b0000 0%, #6b0000 100%);
+    border-color: #8b0000;
+    color: #e8e8e8;
+}
+
+.pause-timer-btn:hover {
+    background: linear-gradient(135deg, #a00000 0%, #800000 100%);
+    border-color: #a00000;
+    color: #e8e8e8;
 }
 
 .rep-counter-header {

@@ -3,6 +3,9 @@ let currentScreen = 'homepage';
 let timerInterval = null;
 let startTime = null;
 let elapsedTime = 0;
+let pausedTime = 0; // Time accumulated before pause
+let isTimerRunning = false;
+let isTimerPaused = false;
 let repCount = 0;
 let athleteData = {};
 
@@ -28,14 +31,20 @@ const displayName = document.getElementById('displayName');
 const displayState = document.getElementById('displayState');
 const displayBodyweight = document.getElementById('displayBodyweight');
 const displayKettlebellWeight = document.getElementById('displayKettlebellWeight');
+const displayEvent = document.getElementById('displayEvent');
 
 // Results screen elements
 const resultsName = document.getElementById('resultsName');
 const resultsState = document.getElementById('resultsState');
 const resultsBodyweight = document.getElementById('resultsBodyweight');
 const resultsKettlebellWeight = document.getElementById('resultsKettlebellWeight');
+const resultsEvent = document.getElementById('resultsEvent');
 const resultsReps = document.getElementById('resultsReps');
 const resultsTime = document.getElementById('resultsTime');
+
+// Timer control buttons
+const startTimerBtn = document.getElementById('startTimerBtn');
+const pauseTimerBtn = document.getElementById('pauseTimerBtn');
 
 // Screen navigation
 function showScreen(screenName) {
@@ -58,12 +67,44 @@ function showScreen(screenName) {
 // Timer functions
 function startTimer() {
     console.log('Starting timer');
-    startTime = Date.now() - elapsedTime;
+    
+    if (isTimerPaused) {
+        // Resume from paused state
+        startTime = Date.now() - pausedTime;
+        isTimerPaused = false;
+    } else {
+        // Start fresh or resume
+        startTime = Date.now() - pausedTime;
+    }
+    
+    isTimerRunning = true;
     
     timerInterval = setInterval(() => {
         elapsedTime = Date.now() - startTime;
         updateTimerDisplay();
     }, 100); // Update every 100ms for smooth display
+    
+    // Update button visibility
+    startTimerBtn.style.display = 'none';
+    pauseTimerBtn.style.display = 'block';
+}
+
+function pauseTimer() {
+    console.log('Pausing timer');
+    
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    
+    // Save the current elapsed time
+    pausedTime = elapsedTime;
+    isTimerRunning = false;
+    isTimerPaused = true;
+    
+    // Update button visibility
+    startTimerBtn.style.display = 'block';
+    pauseTimerBtn.style.display = 'none';
 }
 
 function stopTimer() {
@@ -72,13 +113,20 @@ function stopTimer() {
         clearInterval(timerInterval);
         timerInterval = null;
     }
+    isTimerRunning = false;
+    isTimerPaused = false;
 }
 
 function resetTimer() {
     console.log('Resetting timer');
     stopTimer();
     elapsedTime = 0;
+    pausedTime = 0;
     updateTimerDisplay();
+    
+    // Reset button visibility
+    startTimerBtn.style.display = 'block';
+    pauseTimerBtn.style.display = 'none';
 }
 
 function updateTimerDisplay() {
@@ -144,7 +192,8 @@ athleteForm.addEventListener('submit', (e) => {
         name: document.getElementById('athleteName').value,
         state: document.getElementById('state').value,
         bodyweight: document.getElementById('bodyweight').value,
-        kettlebellWeight: document.getElementById('kettlebellWeight').value
+        kettlebellWeight: document.getElementById('kettlebellWeight').value,
+        event: document.getElementById('event').value
     };
     
     console.log('Athlete data:', athleteData);
@@ -154,6 +203,7 @@ athleteForm.addEventListener('submit', (e) => {
     displayState.textContent = athleteData.state;
     displayBodyweight.textContent = `${athleteData.bodyweight} kg`;
     displayKettlebellWeight.textContent = `${athleteData.kettlebellWeight} kg`;
+    displayEvent.textContent = athleteData.event;
     
     // Reset timer and rep counter
     resetTimer();
@@ -162,8 +212,18 @@ athleteForm.addEventListener('submit', (e) => {
     // Show championship screen
     showScreen('championship');
     
-    // Start timer
+    // Timer remains at 00:00 - user must click Start Timer button
+});
+
+// Timer control button event listeners
+startTimerBtn.addEventListener('click', () => {
+    console.log('Start Timer button clicked');
     startTimer();
+});
+
+pauseTimerBtn.addEventListener('click', () => {
+    console.log('Pause Timer button clicked');
+    pauseTimer();
 });
 
 repCounterBox.addEventListener('click', (e) => {
@@ -199,6 +259,7 @@ finishBtn.addEventListener('click', () => {
     resultsState.textContent = athleteData.state || 'N/A';
     resultsBodyweight.textContent = athleteData.bodyweight ? `${athleteData.bodyweight} kg` : 'N/A';
     resultsKettlebellWeight.textContent = athleteData.kettlebellWeight ? `${athleteData.kettlebellWeight} kg` : 'N/A';
+    resultsEvent.textContent = athleteData.event || 'N/A';
     resultsReps.textContent = repCount;
     resultsTime.textContent = finalTime;
     
