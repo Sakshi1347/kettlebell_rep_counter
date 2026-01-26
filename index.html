@@ -77,6 +77,37 @@
                 <label for="event">Event</label>
                 <input type="text" id="event" name="event" placeholder="e.g., Snatch, Long Cycle, Jerk" required>
             </div>
+            <div class="form-group">
+                <label for="platformNumber">Platform Number</label>
+                <select id="platformNumber" name="platformNumber" required>
+                    <option value="">Select Platform</option>
+                    <option value="Platform 1">Platform 1</option>
+                    <option value="Platform 2">Platform 2</option>
+                    <option value="Platform 3">Platform 3</option>
+                    <option value="Platform 4">Platform 4</option>
+                    <option value="Platform 5">Platform 5</option>
+                    <option value="Platform 6">Platform 6</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="timerDuration">Timer Duration</label>
+                <select id="timerDuration" name="timerDuration" required>
+                    <option value="">Select Duration</option>
+                    <option value="5">5 minutes</option>
+                    <option value="9">9 minutes</option>
+                    <option value="10">10 minutes</option>
+                    <option value="15">15 minutes</option>
+                    <option value="20">20 minutes</option>
+                    <option value="25">25 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="35">35 minutes</option>
+                    <option value="40">40 minutes</option>
+                    <option value="45">45 minutes</option>
+                    <option value="50">50 minutes</option>
+                    <option value="55">55 minutes</option>
+                    <option value="60">60 minutes</option>
+                </select>
+            </div>
             <button type="submit" class="start-timer-button">Continue</button>
         </form>
     </div>
@@ -106,22 +137,38 @@
                     <strong>Event:</strong>
                     <span id="displayEvent"></span>
                 </div>
+                <div class="info-item">
+                    <strong>Platform:</strong>
+                    <span id="displayPlatform"></span>
+                </div>
             </div>
             <div class="main-section">
-                <div class="timer-box">
-                    <div class="timer-label">Timer</div>
-                    <div id="timerDisplay" class="timer-display">00:00</div>
-                    <div class="timer-controls">
-                        <button id="startTimerBtn" class="timer-control-button start-timer-btn">Start Timer</button>
-                        <button id="pauseTimerBtn" class="timer-control-button pause-timer-btn" style="display: none;">Pause Timer</button>
+                <div class="middle-section">
+                    <div class="timer-box">
+                        <div class="timer-label">Timer</div>
+                        <div id="timerDisplay" class="timer-display">00:00</div>
+                        <div class="timer-controls">
+                            <button id="startTimerBtn" class="timer-control-button start-timer-btn">Start Timer</button>
+                            <button id="pauseTimerBtn" class="timer-control-button pause-timer-btn" style="display: none;">Pause Timer</button>
+                            <button id="resetTimerBtn" class="timer-control-button reset-timer-btn">Reset Timer</button>
+                        </div>
+                    </div>
+                    <div class="rep-counter-box" id="repCounterBox">
+                        <div class="rep-counter-header">
+                            <div class="rep-label">Rep Counter</div>
+                            <button class="minus-button" id="minusBtn">−</button>
+                        </div>
+                        <div id="repDisplay" class="rep-display">0</div>
                     </div>
                 </div>
-                <div class="rep-counter-box" id="repCounterBox">
-                    <div class="rep-counter-header">
-                        <div class="rep-label">Rep Counter</div>
-                        <button class="minus-button" id="minusBtn">−</button>
+                <div class="right-section">
+                    <div class="no-counts-box" id="noCountsBox">
+                        <div class="no-counts-header">
+                            <div class="no-counts-label">No Counts</div>
+                            <button class="minus-button" id="noCountsMinusBtn">−</button>
+                        </div>
+                        <div id="noCountsDisplay" class="no-counts-display">0</div>
                     </div>
-                    <div id="repDisplay" class="rep-display">0</div>
                 </div>
                 <button id="finishBtn" class="finish-button">Finish</button>
             </div>
@@ -154,12 +201,20 @@
                     <span class="results-item-label">Event:</span>
                     <span class="results-item-value" id="resultsEvent"></span>
                 </div>
+                <div class="results-item">
+                    <span class="results-item-label">Platform:</span>
+                    <span class="results-item-value" id="resultsPlatform"></span>
+                </div>
             </div>
             <div class="results-stats-card">
                 <div class="results-card-title">Performance</div>
                 <div class="results-item">
                     <span class="results-item-label">Total Reps:</span>
                     <span class="results-item-value highlight" id="resultsReps"></span>
+                </div>
+                <div class="results-item">
+                    <span class="results-item-label">No Counts:</span>
+                    <span class="results-item-value highlight" id="resultsNoCounts"></span>
                 </div>
                 <div class="results-item">
                     <span class="results-item-label">Total Time:</span>
