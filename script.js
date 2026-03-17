@@ -11,6 +11,8 @@ let repCount = 0;
 let noCounts = 0;
 let repCountingEnabled = false; // Rep counting only enabled after timer starts
 let athleteData = {};
+let selectedCategory = '';
+let selectedWeight = '';
 
 // DOM Elements
 const screens = {
@@ -50,6 +52,15 @@ const resultsPlatform = document.getElementById('resultsPlatform');
 const resultsReps = document.getElementById('resultsReps');
 const resultsNoCounts = document.getElementById('resultsNoCounts');
 const resultsTime = document.getElementById('resultsTime');
+
+// Body weight category elements
+const bodyweightCategorySelect = document.getElementById('bodyweightCategory');
+const bodyweightValueSelect = document.getElementById('bodyweightValue');
+
+const bodyweightOptions = {
+    Female: ['52', '58', '65', '75', '75+'],
+    Male: ['63', '68', '74', '80', '87', '95', '95+']
+};
 
 // Timer control buttons
 const startTimerBtn = document.getElementById('startTimerBtn');
@@ -203,6 +214,25 @@ function formatTimeForDisplay(milliseconds) {
     return `${minutesStr}:${secondsStr}`;
 }
 
+function formatBodyweightDisplay(category, weight) {
+    if (!category || !weight) {
+        return 'N/A';
+    }
+    return `${category} - ${weight}`;
+}
+
+function populateBodyweightOptions(category) {
+    const options = bodyweightOptions[category] || [];
+    bodyweightValueSelect.innerHTML = '<option value="">Select Weight</option>';
+    options.forEach((weight) => {
+        const option = document.createElement('option');
+        option.value = weight;
+        option.textContent = weight;
+        bodyweightValueSelect.appendChild(option);
+    });
+    bodyweightValueSelect.disabled = options.length === 0;
+}
+
 // Rep counter functions
 function increaseRep() {
     repCount++;
@@ -281,7 +311,10 @@ function finishSession() {
     // Populate results screen
     resultsName.textContent = athleteData.name || 'N/A';
     resultsState.textContent = athleteData.state || 'N/A';
-    resultsBodyweight.textContent = athleteData.bodyweight ? `${athleteData.bodyweight} kg` : 'N/A';
+    resultsBodyweight.textContent = formatBodyweightDisplay(
+        athleteData.bodyweightCategory,
+        athleteData.bodyweightValue
+    );
     resultsKettlebellWeight.textContent = athleteData.kettlebellWeight ? `${athleteData.kettlebellWeight} kg` : 'N/A';
     resultsEvent.textContent = athleteData.event || 'N/A';
     resultsPlatform.textContent = athleteData.platformNumber || 'N/A';
@@ -294,6 +327,25 @@ function finishSession() {
 }
 
 // Event Listeners
+populateBodyweightOptions('');
+
+bodyweightCategorySelect.addEventListener('change', () => {
+    selectedCategory = bodyweightCategorySelect.value;
+    const previousWeight = selectedWeight;
+    populateBodyweightOptions(selectedCategory);
+    if (bodyweightOptions[selectedCategory]?.includes(previousWeight)) {
+        bodyweightValueSelect.value = previousWeight;
+        selectedWeight = previousWeight;
+    } else {
+        bodyweightValueSelect.value = '';
+        selectedWeight = '';
+    }
+});
+
+bodyweightValueSelect.addEventListener('change', () => {
+    selectedWeight = bodyweightValueSelect.value;
+});
+
 startBtn.addEventListener('click', () => {
     console.log('Start button clicked');
     showScreen('athleteDetails');
@@ -316,10 +368,14 @@ athleteForm.addEventListener('submit', (e) => {
     timeLimit = timerDurationMinutes * 60 * 1000;
     
     // Get form data
+    selectedCategory = bodyweightCategorySelect.value;
+    selectedWeight = bodyweightValueSelect.value;
+
     athleteData = {
         name: document.getElementById('athleteName').value,
         state: document.getElementById('state').value,
-        bodyweight: document.getElementById('bodyweight').value,
+        bodyweightCategory: selectedCategory,
+        bodyweightValue: selectedWeight,
         kettlebellWeight: document.getElementById('kettlebellWeight').value,
         event: document.getElementById('event').value,
         platformNumber: document.getElementById('platformNumber').value
@@ -331,7 +387,10 @@ athleteForm.addEventListener('submit', (e) => {
     // Display athlete info
     displayName.textContent = athleteData.name;
     displayState.textContent = athleteData.state;
-    displayBodyweight.textContent = `${athleteData.bodyweight} kg`;
+    displayBodyweight.textContent = formatBodyweightDisplay(
+        athleteData.bodyweightCategory,
+        athleteData.bodyweightValue
+    );
     displayKettlebellWeight.textContent = `${athleteData.kettlebellWeight} kg`;
     displayEvent.textContent = athleteData.event;
     displayPlatform.textContent = athleteData.platformNumber;
