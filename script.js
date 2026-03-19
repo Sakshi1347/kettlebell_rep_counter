@@ -53,14 +53,8 @@ const resultsReps = document.getElementById('resultsReps');
 const resultsNoCounts = document.getElementById('resultsNoCounts');
 const resultsTime = document.getElementById('resultsTime');
 
-// Body weight category elements
-const bodyweightCategorySelect = document.getElementById('bodyweightCategory');
-const bodyweightValueSelect = document.getElementById('bodyweightValue');
-
-const bodyweightOptions = {
-    Female: ['52', '58', '65', '75', '75+'],
-    Male: ['63', '68', '74', '80', '87', '95', '95+']
-};
+// Body weight category element
+const bodyweightSelect = document.getElementById('bodyweight');
 
 // Timer control buttons
 const startTimerBtn = document.getElementById('startTimerBtn');
@@ -218,19 +212,7 @@ function formatBodyweightDisplay(category, weight) {
     if (!category || !weight) {
         return 'N/A';
     }
-    return `${category} - ${weight}`;
-}
-
-function populateBodyweightOptions(category) {
-    const options = bodyweightOptions[category] || [];
-    bodyweightValueSelect.innerHTML = '<option value="">Select Weight</option>';
-    options.forEach((weight) => {
-        const option = document.createElement('option');
-        option.value = weight;
-        option.textContent = weight;
-        bodyweightValueSelect.appendChild(option);
-    });
-    bodyweightValueSelect.disabled = options.length === 0;
+    return `${category} - ${weight} kg`;
 }
 
 // Rep counter functions
@@ -327,23 +309,13 @@ function finishSession() {
 }
 
 // Event Listeners
-populateBodyweightOptions('');
-
-bodyweightCategorySelect.addEventListener('change', () => {
-    selectedCategory = bodyweightCategorySelect.value;
-    const previousWeight = selectedWeight;
-    populateBodyweightOptions(selectedCategory);
-    if (bodyweightOptions[selectedCategory]?.includes(previousWeight)) {
-        bodyweightValueSelect.value = previousWeight;
-        selectedWeight = previousWeight;
-    } else {
-        bodyweightValueSelect.value = '';
-        selectedWeight = '';
-    }
-});
-
-bodyweightValueSelect.addEventListener('change', () => {
-    selectedWeight = bodyweightValueSelect.value;
+bodyweightSelect.addEventListener('change', () => {
+    const bodyweightSelection = bodyweightSelect.value;
+    const [category, weight] = bodyweightSelection
+        ? bodyweightSelection.split('|')
+        : ['', ''];
+    selectedCategory = category;
+    selectedWeight = weight;
 });
 
 startBtn.addEventListener('click', () => {
@@ -368,8 +340,12 @@ athleteForm.addEventListener('submit', (e) => {
     timeLimit = timerDurationMinutes * 60 * 1000;
     
     // Get form data
-    selectedCategory = bodyweightCategorySelect.value;
-    selectedWeight = bodyweightValueSelect.value;
+    const bodyweightSelection = bodyweightSelect.value;
+    const [category, weight] = bodyweightSelection
+        ? bodyweightSelection.split('|')
+        : ['', ''];
+    selectedCategory = category;
+    selectedWeight = weight;
 
     athleteData = {
         name: document.getElementById('athleteName').value,

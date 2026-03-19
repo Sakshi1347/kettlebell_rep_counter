@@ -11,7 +11,11 @@
 <body>
     <!-- Homepage Screen -->
     <div id="homepage" class="screen active">
-        <h1>Kettlebell Rep Counter</h1>
+        <div class="championship-header">
+            <img class="championship-logo" src="assets/left logo.jpeg" alt="Left logo">
+            <h1>Kettlebell Rep Counter</h1>
+            <img class="championship-logo championship-logo-right" src="assets/right logo.jpeg" alt="Right logo">
+        </div>
         <button id="startBtn" class="start-button">Start</button>
     </div>
 
@@ -66,15 +70,25 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="bodyweightCategory">Body Weight Category</label>
-                <select id="bodyweightCategory" name="bodyweightCategory" required>
-                    <option value="">Select Category</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                </select>
-                <label for="bodyweightValue">Weight</label>
-                <select id="bodyweightValue" name="bodyweightValue" required>
-                    <option value="">Select Weight</option>
+                <label for="bodyweight">Body Weight Category</label>
+                <select id="bodyweight" name="bodyweight" required>
+                    <option value="">Select Body Weight Category</option>
+                    <optgroup label="Female">
+                        <option value="Female|52">52</option>
+                        <option value="Female|58">58</option>
+                        <option value="Female|65">65</option>
+                        <option value="Female|75">75</option>
+                        <option value="Female|75+">75+</option>
+                    </optgroup>
+                    <optgroup label="Male">
+                        <option value="Male|63">63</option>
+                        <option value="Male|68">68</option>
+                        <option value="Male|74">74</option>
+                        <option value="Male|80">80</option>
+                        <option value="Male|87">87</option>
+                        <option value="Male|95">95</option>
+                        <option value="Male|95+">95+</option>
+                    </optgroup>
                 </select>
             </div>
             <div class="form-group">
@@ -192,7 +206,11 @@
 
     <!-- Results Screen -->
     <div id="results" class="screen">
-        <h1>Results</h1>
+        <div class="championship-header">
+            <img class="championship-logo" src="assets/left logo.jpeg" alt="Left logo">
+            <h1>Results</h1>
+            <img class="championship-logo championship-logo-right" src="assets/right logo.jpeg" alt="Right logo">
+        </div>
         <div class="results-container">
             <div class="results-athlete-card">
                 <div class="results-card-title">Athlete Details</div>
