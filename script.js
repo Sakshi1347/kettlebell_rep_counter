@@ -127,6 +127,7 @@ function startTimer() {
             console.log('Timer limit reached');
             stopTimer();
             timerStoppedAtLimit = true;
+            startCooldownTimer();
             // Rep counter remains enabled and visible after auto-stop
             // Final time remains displayed
             // Do NOT automatically transition to results screen
