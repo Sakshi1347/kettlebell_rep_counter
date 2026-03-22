@@ -12,16 +12,18 @@
     <!-- Homepage Screen -->
     <div id="homepage" class="screen active">
         <div class="championship-header">
-            <img class="championship-logo" src="assets/left logo.jpeg" alt="Left logo">
+            <img class="championship-logo" src="assets/Logo(1).png" alt="Logo">
             <h1>Kettlebell Rep Counter</h1>
-            <img class="championship-logo championship-logo-right" src="assets/right logo.jpeg" alt="Right logo">
         </div>
         <button id="startBtn" class="start-button">Start</button>
     </div>
 
     <!-- Athlete Details Screen -->
     <div id="athleteDetails" class="screen">
-        <h1>Kettlebell Rep Counter</h1>
+        <div class="championship-header">
+            <img class="championship-logo" src="assets/Logo(1).png" alt="Logo">
+            <h1>Kettlebell Rep Counter</h1>
+        </div>
         <form id="athleteForm">
             <div class="form-group">
                 <label for="athleteName">Athlete Name</label>
@@ -140,9 +142,8 @@
     <!-- Championship Screen -->
     <div id="championship" class="screen">
         <div class="championship-header">
-            <img class="championship-logo" src="assets/left logo.jpeg" alt="Left logo">
+            <img class="championship-logo" src="assets/Logo(1).png" alt="Logo">
             <h1 class="championship-title">GSIF State & National Kettlebell Championships 2026-27</h1>
-            <img class="championship-logo championship-logo-right" src="assets/right logo.jpeg" alt="Right logo">
         </div>
         <div class="championship-container">
             <div class="athlete-info-section">
@@ -197,6 +198,10 @@
                             <button class="minus-button" id="noCountsMinusBtn">−</button>
                         </div>
                         <div id="noCountsDisplay" class="no-counts-display">0</div>
+                        <div class="cooldown-timer">
+                            <div class="cooldown-label">Cooldown Timer</div>
+                            <div id="cooldownDisplay" class="cooldown-display">05:00</div>
+                        </div>
                     </div>
                 </div>
                 <button id="finishBtn" class="finish-button">Finish</button>
@@ -207,9 +212,8 @@
     <!-- Results Screen -->
     <div id="results" class="screen">
         <div class="championship-header">
-            <img class="championship-logo" src="assets/left logo.jpeg" alt="Left logo">
+            <img class="championship-logo" src="assets/Logo(1).png" alt="Logo">
             <h1>Results</h1>
-            <img class="championship-logo championship-logo-right" src="assets/right logo.jpeg" alt="Right logo">
         </div>
         <div class="results-container">
             <div class="results-athlete-card">
@@ -257,6 +261,11 @@
         </div>
         <p class="results-message">Great job</p>
         <button id="homeBtn" class="home-button">Home</button>
+    </div>
+
+    <div class="cooldown-timer cooldown-timer-global" aria-live="polite">
+        <div class="cooldown-label">Cooldown Timer</div>
+        <div id="cooldownDisplayGlobal" class="cooldown-display">05:00</div>
     </div>
 
     <script src="script.js"></script>

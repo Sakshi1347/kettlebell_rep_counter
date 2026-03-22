@@ -13,6 +13,9 @@ let repCountingEnabled = false; // Rep counting only enabled after timer starts
 let athleteData = {};
 let selectedCategory = '';
 let selectedWeight = '';
+let cooldownInterval = null;
+let cooldownRemainingMs = 5 * 60 * 1000;
+let cooldownRunning = false;
 
 // DOM Elements
 const screens = {
@@ -33,6 +36,8 @@ const homeBtn = document.getElementById('homeBtn');
 const timerDisplay = document.getElementById('timerDisplay');
 const repDisplay = document.getElementById('repDisplay');
 const noCountsDisplay = document.getElementById('noCountsDisplay');
+const cooldownDisplay = document.getElementById('cooldownDisplay');
+const cooldownDisplayGlobal = document.getElementById('cooldownDisplayGlobal');
 
 // Display elements
 const displayName = document.getElementById('displayName');
@@ -87,6 +92,10 @@ function startTimer() {
     if (timerInterval) {
         console.warn('Timer already running, ignoring start request');
         return;
+    }
+
+    if (cooldownRunning) {
+        stopCooldownTimer(true);
     }
     
     // Don't start if timer was stopped at limit
@@ -208,6 +217,56 @@ function formatTimeForDisplay(milliseconds) {
     return `${minutesStr}:${secondsStr}`;
 }
 
+function formatCooldownDisplay(milliseconds) {
+    const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds
+        .toString()
+        .padStart(2, '0')}`;
+}
+
+function updateCooldownDisplay() {
+    if (cooldownDisplay) {
+        cooldownDisplay.textContent = formatCooldownDisplay(cooldownRemainingMs);
+    }
+    if (cooldownDisplayGlobal) {
+        cooldownDisplayGlobal.textContent = formatCooldownDisplay(cooldownRemainingMs);
+    }
+}
+
+function stopCooldownTimer(resetDisplay = false) {
+    if (cooldownInterval) {
+        clearInterval(cooldownInterval);
+        cooldownInterval = null;
+    }
+    cooldownRunning = false;
+    if (resetDisplay) {
+        cooldownRemainingMs = 5 * 60 * 1000;
+        updateCooldownDisplay();
+    }
+}
+
+function startCooldownTimer() {
+    if (cooldownRunning) {
+        return;
+    }
+    cooldownRemainingMs = 5 * 60 * 1000;
+    updateCooldownDisplay();
+    cooldownRunning = true;
+
+    cooldownInterval = setInterval(() => {
+        cooldownRemainingMs -= 1000;
+        if (cooldownRemainingMs <= 0) {
+            cooldownRemainingMs = 0;
+            updateCooldownDisplay();
+            stopCooldownTimer();
+            return;
+        }
+        updateCooldownDisplay();
+    }, 1000);
+}
+
 function formatBodyweightDisplay(category, weight) {
     if (!category || !weight) {
         return 'N/A';
@@ -283,6 +342,7 @@ function finishSession() {
     
     // Stop timer
     stopTimer();
+    startCooldownTimer();
     
     // Format and display results
     const finalTime = formatTimeForDisplay(elapsedTime);
@@ -317,6 +377,8 @@ bodyweightSelect.addEventListener('change', () => {
     selectedCategory = category;
     selectedWeight = weight;
 });
+
+updateCooldownDisplay();
 
 startBtn.addEventListener('click', () => {
     console.log('Start button clicked');
