@@ -386,6 +386,35 @@ startBtn.addEventListener('click', () => {
     showScreen('athleteDetails');
 });
 
+document.addEventListener('keydown', (event) => {
+    if (event.code !== 'Space' && event.key !== ' ') {
+        return;
+    }
+
+    if (currentScreen !== 'championship') {
+        return;
+    }
+
+    const target = event.target;
+    if (
+        target &&
+        (target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.tagName === 'SELECT' ||
+            target.isContentEditable)
+    ) {
+        return;
+    }
+
+    event.preventDefault();
+
+    if (!repCountingEnabled) {
+        return;
+    }
+
+    increaseRep();
+});
+
 athleteForm.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Athlete form submitted');
